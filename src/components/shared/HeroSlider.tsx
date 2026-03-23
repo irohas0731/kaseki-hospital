@@ -4,12 +4,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { siteConfig } from '@/lib/siteConfig';
 
 const slides = [
-  { id: 1, label: 'HERO IMAGE 1', color: 'bg-primary/20' },
-  { id: 2, label: 'HERO IMAGE 2', color: 'bg-secondary/20' },
-  { id: 3, label: 'HERO IMAGE 3', color: 'bg-primary-light/20' },
-  { id: 4, label: 'HERO IMAGE 4', color: 'bg-accent-green/20' },
-  { id: 5, label: 'HERO IMAGE 5', color: 'bg-primary-dark/20' },
-  { id: 6, label: 'HERO IMAGE 6', color: 'bg-accent-red/20' },
+  { id: 1, label: 'HERO IMAGE 1', from: 'from-primary/20', to: 'to-primary-light/10' },
+  { id: 2, label: 'HERO IMAGE 2', from: 'from-secondary/20', to: 'to-primary/10' },
+  { id: 3, label: 'HERO IMAGE 3', from: 'from-primary-light/20', to: 'to-accent-green/10' },
+  { id: 4, label: 'HERO IMAGE 4', from: 'from-accent-green/15', to: 'to-primary-light/10' },
+  { id: 5, label: 'HERO IMAGE 5', from: 'from-primary-dark/20', to: 'to-primary/10' },
+  { id: 6, label: 'HERO IMAGE 6', from: 'from-primary/15', to: 'to-secondary/10' },
 ];
 
 export default function HeroSlider() {
@@ -29,12 +29,12 @@ export default function HeroSlider() {
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${slide.color} ${
+          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 bg-gradient-to-br ${slide.from} ${slide.to} ${
             index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
         >
-          <div className="flex flex-col items-center justify-center border-2 border-dashed border-border w-full h-full">
-            <p className="text-xs md:text-sm text-text-muted mb-2 md:mb-4">{slide.label} — 1920×700 推奨</p>
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            <p className="text-xs md:text-sm text-text-muted/30 mb-2 md:mb-4">{slide.label} — 1920×700</p>
             <h2 className="text-lg md:text-4xl lg:text-5xl font-bold font-serif text-text text-center px-4">
               {siteConfig.catchcopy}
             </h2>

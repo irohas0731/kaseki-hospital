@@ -57,6 +57,26 @@ const quickLinks = [
   { href: '/rehabilitation/facility', ja: '施設案内', en: 'Facility' },
 ];
 
+function WaveSeparator() {
+  return (
+    <div className="relative h-12 md:h-16 -mb-px">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 64" preserveAspectRatio="none" fill="none">
+        <path d="M0 32C240 56 480 8 720 32C960 56 1200 8 1440 32V64H0V32Z" fill="var(--color-primary-bg)" />
+      </svg>
+    </div>
+  );
+}
+
+function WaveSeparatorBottom() {
+  return (
+    <div className="relative h-12 md:h-16 -mt-px">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 64" preserveAspectRatio="none" fill="none">
+        <path d="M0 0H1440V32C1200 8 960 56 720 32C480 8 240 56 0 32V0Z" fill="var(--color-primary-bg)" />
+      </svg>
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -73,15 +93,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Service Cards */}
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="Services" jaLabel="診療サービスのご案内" />
-          </ScrollFadeIn>
+      {/* Service Cards — scaleIn animation, dot pattern background */}
+      <section className="relative py-20 md:py-28">
+        <div className="absolute inset-0 bg-dot-pattern opacity-40" />
+        <div className="relative mx-auto max-w-7xl px-4">
+          <SectionHeader enLabel="Services" jaLabel="診療サービスのご案内" variant="large" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {services.map((service, i) => (
-              <ScrollFadeIn key={service.href} delay={i * 100}>
+              <ScrollFadeIn key={service.href} delay={i * 60} variant="scaleIn">
                 <ServiceCard {...service} colorIndex={i} />
               </ScrollFadeIn>
             ))}
@@ -89,39 +108,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Link Banners */}
+      {/* Link Banners — no animation */}
       <section className="bg-bg-off py-12">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-4 md:grid-cols-3">
-            {banners.map((banner, i) => (
-              <ScrollFadeIn key={banner.href} delay={i * 100}>
-                <Link
-                  href={banner.href}
-                  className="group flex items-center justify-between rounded-lg border border-border bg-bg p-6 transition-all hover:shadow-md hover:border-primary"
-                >
-                  <div>
-                    <p className="font-en text-xs text-text-muted">{banner.enLabel}</p>
-                    <p className="mt-1 text-sm font-bold">{banner.label}</p>
-                  </div>
-                  <svg className="h-5 w-5 text-text-muted transition-transform group-hover:translate-x-1 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </ScrollFadeIn>
+            {banners.map((banner) => (
+              <Link
+                key={banner.href}
+                href={banner.href}
+                className="group flex items-center justify-between rounded-lg border border-border bg-bg p-6 transition-all hover:shadow-md hover:border-primary"
+              >
+                <div>
+                  <p className="font-en text-xs text-text-muted">{banner.enLabel}</p>
+                  <p className="mt-1 text-sm font-bold">{banner.label}</p>
+                </div>
+                <svg className="h-5 w-5 text-text-muted transition-transform group-hover:translate-x-1 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* News Tabs */}
-      <section className="py-16 md:py-20">
+      {/* News — no animation, accent header */}
+      <section className="py-14 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="News" jaLabel="新着情報" />
-          </ScrollFadeIn>
-          <ScrollFadeIn delay={200}>
-            <NewsTab />
-          </ScrollFadeIn>
+          <SectionHeader enLabel="News" jaLabel="新着情報" variant="accent" align="left" />
+          <NewsTab />
           <div className="mt-6 text-center">
             <Link href="/news" className="inline-block rounded border border-primary px-8 py-2.5 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-colors">
               新着情報一覧へ
@@ -130,37 +144,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Recruitment */}
+      {/* Recruitment — no animation, minimal header, wave separators */}
+      <WaveSeparator />
       <section className="bg-primary-bg py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="Recruitment" jaLabel="参加者募集" />
-          </ScrollFadeIn>
-          <ScrollFadeIn delay={200}>
-            <div className="rounded-lg border border-border bg-bg p-8 text-center">
-              <div className="mx-auto max-w-lg">
-                <h3 className="text-lg font-bold">ボランティア・治験参加者募集中</h3>
-                <p className="mt-3 text-sm text-text-light leading-relaxed">
-                  当院では、地域の皆さまとともに医療の質の向上を目指しています。ボランティア活動への参加や、治験へのご協力を募集しております。詳しくはお気軽にお問い合わせください。
-                </p>
-                <Link href="/contact" className="mt-6 inline-block rounded bg-primary px-8 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors">
-                  お問い合わせはこちら
-                </Link>
-              </div>
+          <SectionHeader enLabel="Recruitment" jaLabel="参加者募集" variant="minimal" />
+          <div className="rounded-lg border border-border bg-bg p-8 text-center">
+            <div className="mx-auto max-w-lg">
+              <h3 className="text-lg font-bold">ボランティア・治験参加者募集中</h3>
+              <p className="mt-3 text-sm text-text-light leading-relaxed">
+                当院では、地域の皆さまとともに医療の質の向上を目指しています。ボランティア活動への参加や、治験へのご協力を募集しております。詳しくはお気軽にお問い合わせください。
+              </p>
+              <Link href="/contact" className="mt-6 inline-block rounded bg-primary px-8 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors">
+                お問い合わせはこちら
+              </Link>
             </div>
-          </ScrollFadeIn>
+          </div>
         </div>
       </section>
+      <WaveSeparatorBottom />
 
-      {/* Activities */}
-      <section className="py-16 md:py-20">
+      {/* Activities — fadeLeft animation */}
+      <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="Activities" jaLabel="病院の活動" />
-          </ScrollFadeIn>
+          <SectionHeader enLabel="Activities" jaLabel="病院の活動" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {activities.map((activity, i) => (
-              <ScrollFadeIn key={i} delay={i * 100}>
+              <ScrollFadeIn key={i} delay={i * 80} variant="fadeLeft">
                 <ActivityCard {...activity} colorIndex={i} />
               </ScrollFadeIn>
             ))}
@@ -168,45 +178,41 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pickup */}
-      <section className="bg-bg-off py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="Pick Up" jaLabel="ピックアップ" />
+      {/* Pickup — fadeIn animation, blur circle decorations */}
+      <section className="relative py-20 md:py-24 overflow-hidden">
+        <div className="absolute top-10 -left-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-10 -right-20 w-80 h-80 rounded-full bg-secondary/5 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-4">
+          <SectionHeader enLabel="Pick Up" jaLabel="ピックアップ" variant="large" />
+          <ScrollFadeIn variant="fadeIn">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {pickups.map((pickup, i) => (
+                <PickupCard key={i} {...pickup} colorIndex={i} />
+              ))}
+            </div>
           </ScrollFadeIn>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {pickups.map((pickup, i) => (
-              <ScrollFadeIn key={i} delay={i * 100}>
-                <PickupCard {...pickup} colorIndex={i} />
-              </ScrollFadeIn>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Downloads */}
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <ScrollFadeIn>
-            <SectionHeader enLabel="Download" jaLabel="ダウンロード" />
-          </ScrollFadeIn>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Downloads — no animation, accent header, narrower width */}
+      <section className="bg-bg-off py-12 md:py-16">
+        <div className="mx-auto max-w-5xl px-4">
+          <SectionHeader enLabel="Download" jaLabel="ダウンロード" variant="accent" align="left" />
+          <div className="grid gap-4 sm:grid-cols-2">
             {downloads.map((dl, i) => (
-              <ScrollFadeIn key={i} delay={i * 100}>
-                <DownloadCard {...dl} />
-              </ScrollFadeIn>
+              <DownloadCard key={i} {...dl} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Quick Access */}
+      {/* Quick Access — gradient underline */}
       <section className="bg-bg-dark py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-10 text-center">
             <p className="font-en text-sm tracking-[0.2em] uppercase text-white/60">Quick Access</p>
             <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">よくアクセスされるページ</h2>
-            <div className="mt-3 mx-auto h-0.5 w-12 bg-secondary" />
+            <div className="mt-3 mx-auto h-0.5 w-16 bg-gradient-to-r from-secondary to-primary rounded-full" />
           </div>
           <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
             {quickLinks.map((link, i) => (

@@ -1,40 +1,40 @@
 import Link from 'next/link';
 
-const pastelThemes = [
+const themes = [
   {
-    bg: 'bg-[#fce4ec]',
-    hoverBg: 'group-hover:bg-[#f8bbd0]',
-    accent: 'text-[#c06078]',
-    iconBg: 'bg-[#f8bbd0]',
-    label: '#c06078',
+    gradient: 'from-primary/12 to-primary-light/8',
+    accent: 'text-primary',
+    iconBg: 'bg-primary/15',
+    label: 'var(--color-primary)',
+    hoverBorder: 'group-hover:border-primary/40',
   },
   {
-    bg: 'bg-[#e8f5e9]',
-    hoverBg: 'group-hover:bg-[#c8e6c9]',
-    accent: 'text-[#5a9a68]',
-    iconBg: 'bg-[#c8e6c9]',
-    label: '#5a9a68',
+    gradient: 'from-primary-light/12 to-primary/8',
+    accent: 'text-primary-light',
+    iconBg: 'bg-primary-light/15',
+    label: 'var(--color-primary-light)',
+    hoverBorder: 'group-hover:border-primary-light/40',
   },
   {
-    bg: 'bg-[#fff3e0]',
-    hoverBg: 'group-hover:bg-[#ffe0b2]',
-    accent: 'text-[#c08850]',
-    iconBg: 'bg-[#ffe0b2]',
-    label: '#c08850',
+    gradient: 'from-primary-dark/12 to-primary/8',
+    accent: 'text-primary-dark',
+    iconBg: 'bg-primary-dark/15',
+    label: 'var(--color-primary-dark)',
+    hoverBorder: 'group-hover:border-primary-dark/40',
   },
   {
-    bg: 'bg-[#e3f2fd]',
-    hoverBg: 'group-hover:bg-[#bbdefb]',
-    accent: 'text-[#5088b0]',
-    iconBg: 'bg-[#bbdefb]',
-    label: '#5088b0',
+    gradient: 'from-accent-green/12 to-primary-light/8',
+    accent: 'text-accent-green',
+    iconBg: 'bg-accent-green/15',
+    label: 'var(--color-accent-green)',
+    hoverBorder: 'group-hover:border-accent-green/40',
   },
   {
-    bg: 'bg-[#f3e5f5]',
-    hoverBg: 'group-hover:bg-[#e1bee7]',
-    accent: 'text-[#9060a0]',
-    iconBg: 'bg-[#e1bee7]',
-    label: '#9060a0',
+    gradient: 'from-secondary/12 to-primary/8',
+    accent: 'text-secondary',
+    iconBg: 'bg-secondary/15',
+    label: 'var(--color-secondary)',
+    hoverBorder: 'group-hover:border-secondary/40',
   },
 ];
 
@@ -51,14 +51,14 @@ export default function ServiceCard({
   description: string;
   colorIndex?: number;
 }) {
-  const theme = pastelThemes[colorIndex % pastelThemes.length];
+  const theme = themes[colorIndex % themes.length];
 
   return (
     <Link href={href} className="group block h-full">
-      <div className={`relative h-full overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-xl`}>
+      <div className={`relative h-full overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm transition-all duration-300 ease-out group-hover:shadow-lg ${theme.hoverBorder}`}>
         {/* Image area */}
         <div
-          className={`relative flex h-44 items-center justify-center border-b border-dashed border-border/80 transition-colors duration-500 ${theme.bg} ${theme.hoverBg}`}
+          className={`relative flex h-44 items-center justify-center bg-gradient-to-br ${theme.gradient}`}
         >
           <div className="text-center">
             <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full ${theme.iconBg} transition-transform duration-500 group-hover:scale-110`}>
@@ -66,8 +66,8 @@ export default function ServiceCard({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
               </svg>
             </div>
-            <p className="text-xs text-text-muted">IMAGE</p>
-            <p className="mt-0.5 text-[10px] text-text-muted/70">640×440 推奨</p>
+            <p className="text-xs text-text-muted/30">IMAGE</p>
+            <p className="mt-0.5 text-[10px] text-text-muted/20">640×440</p>
           </div>
         </div>
 

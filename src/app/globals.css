@@ -60,6 +60,11 @@
   .stagger-4 { animation-delay: 0.4s; }
   .stagger-5 { animation-delay: 0.5s; }
   .stagger-6 { animation-delay: 0.6s; }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }
 
 @keyframes fadeInUp {
@@ -86,4 +91,37 @@
 @keyframes slideOut {
   from { transform: translateX(0); }
   to { transform: translateX(100%); }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
