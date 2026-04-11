@@ -24,7 +24,7 @@ export default function SectionHeader({
     return (
       <div className={`mb-10 ${align === 'center' ? 'text-center' : 'text-left'}`}>
         <div className={`flex items-center gap-3 ${align === 'center' ? 'justify-center' : ''}`}>
-          <div className="w-1 h-8 bg-primary rounded-full" />
+          <div className="w-1 h-8 bg-primary" />
           <div>
             <p className="font-en text-[11px] tracking-[0.2em] uppercase text-text-muted">
               {enLabel}
